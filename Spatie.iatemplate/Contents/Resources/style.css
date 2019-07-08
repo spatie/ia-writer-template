@@ -321,8 +321,8 @@ blockquote em {
 /* Headings */
 
 h1 {
-  margin-top: calc((62 / 23) * 1em);
-  margin-bottom: calc((31 / 23) * 1em);
+  margin-top: calc((31 / 23) * 1em);
+  margin-bottom: calc((62 / 23) * 1em);
   font-size: 2em;
   line-height: calc(31 / 23); /* 1.3478 = 31px @ font-size: 23px */
   text-transform: uppercase;
@@ -703,14 +703,16 @@ h4:before {
   counter-reset: toc2counter;
 }
 
-.TOC > ul,
-.TOC > ul > li > ul {
+.TOC ul {
   padding: 0;
 }
 
-.TOC > ul > li:before,
-.TOC > ul > li > ul > li:before {
+.TOC li:before {
   content: none;
+}
+
+.TOC > ul > li > ul > li {
+  margin-bottom: 0.85em;
 }
 
 .TOC > ul > li > a {
@@ -721,8 +723,16 @@ h4:before {
   font-weight: 500;
 }
 
+.TOC > ul > li > ul > li li {
+  padding-left: 0.85em;
+}
+
 .TOC > ul > li > ul > li {
   counter-reset: toc3counter;
+}
+
+.TOC li > a:before {
+  font-variant-numeric: tabular-nums;
 }
 
 .TOC > ul > li > ul > li > a:before {
