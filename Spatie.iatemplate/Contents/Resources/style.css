@@ -322,7 +322,7 @@ blockquote em {
 
 h1 {
   margin-top: calc((62 / 23) * 1em);
-  margin-bottom: calc((62 / 23) * 1em);
+  margin-bottom: calc((31 / 23) * 1em);
   font-size: 2em;
   line-height: calc(31 / 23); /* 1.3478 = 31px @ font-size: 23px */
   text-transform: uppercase;
@@ -503,11 +503,8 @@ table {
   line-height: calc(25 / 16); /* 1.5625 = 25px @ font-size: 16px; */
 }
 
-/* Table label
-   13.86672HACK Small caps temporary workaround via all caps in smaller Tiempos Bold. See h6 above for more info */
 th {
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: inherit;
 }
 
 /* Code */
@@ -664,7 +661,8 @@ code,
 kbd {
   font-family: "Fira Code";
   border: none;
-  background-color: transparent;
+  background-color: #ddedf0;
+  color: #207595 !important;
 }
 
 /* Numbering */
@@ -686,19 +684,63 @@ h2:before {
   counter-increment: h2counter;
 }
 
+h3 {
+  counter-reset: h4counter;
+}
+
 h3:before {
   content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
   counter-increment: h3counter;
 }
 
-.TOC > ul {
+h4:before {
+  content: counter(h2counter) "." counter(h3counter) "." counter(h4counter)
+    ".\0000a0\0000a0";
+  counter-increment: h4counter;
+}
+
+.TOC {
+  counter-reset: toc2counter;
+}
+
+.TOC > ul,
+.TOC > ul > li > ul {
   padding: 0;
 }
 
-.TOC > ul > li:before {
+.TOC > ul > li:before,
+.TOC > ul > li > ul > li:before {
   content: none;
 }
 
 .TOC > ul > li > a {
   display: none;
+}
+
+.TOC > ul > li > ul > li > a {
+  font-weight: 500;
+}
+
+.TOC > ul > li > ul > li {
+  counter-reset: toc3counter;
+}
+
+.TOC > ul > li > ul > li > a:before {
+  content: counter(toc2counter) ".\0000a0\0000a0";
+  counter-increment: toc2counter;
+}
+
+.TOC > ul > li > ul > li > ul > li {
+  counter-reset: toc4counter;
+}
+
+.TOC > ul > li > ul > li > ul > li > a:before {
+  content: counter(toc2counter) "." counter(toc3counter) ".\0000a0\0000a0";
+  counter-increment: toc3counter;
+}
+
+.TOC > ul > li > ul > li > ul > li > ul > li > a:before {
+  content: counter(toc2counter) "." counter(toc3counter) "."
+    counter(toc4counter) ".\0000a0\0000a0";
+  counter-increment: toc4counter;
 }
